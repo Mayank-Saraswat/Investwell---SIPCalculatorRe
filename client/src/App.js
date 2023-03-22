@@ -1,10 +1,18 @@
 import './App.css';
+import Sidebar from './Components/Sidebar';
+import SIPCalc from './Components/SIPCalc';
 
 function App() {
   return (
-    <div className="App">
-      <p>Pull Request</p>
+    <>
+    <div className='super-div'>
+      <Sidebar/>
+      <div className='leftFull'>
+        <button>Back</button>
+      <SIPCalc/>
+      </div>
     </div>
+    </>
   );
 }
 

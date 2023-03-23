@@ -1,6 +1,6 @@
-import Calc from "./Calc";
-import Graph from "./Graph";
-import ErrorComp from "./ErrorComp";
+import Calc from "./calculator";
+import Graph from "../../../client/src/Components/graph";
+import ErrorComp from "../../../client/src/Components/errorComp";
 import { React, useState, useEffect } from "react";
 import axios from 'axios';
 
@@ -9,11 +9,8 @@ export default function SIPCalc() {
   const [investmentPeriod, setValueInvestmentPeriod] = useState(5);
   const [rateOfReturn, setValueRateOfReturn] = useState(10);
   const [rateOfInflation, setValueRateOfInflation] = useState(2);
-  const [sipGrowthResult,setSipGrowthResult] = useState();
-  const [graph, setGraph] = useState();
-  const [status, setStatus] = useState(0);
   const [err,setError]= useState();
-
+  const [result, setResult] = useState();
 
   useEffect(() => {
     axios.get('/api', {
@@ -29,8 +26,7 @@ export default function SIPCalc() {
           setError(true);
         }
         else{
-          setSipGrowthResult(res.data.fresult.sipGrowthResult);
-          setGraph(res.data.fresult.graph);
+          setResult(res.data.fresult);
           setError(false);
           }    
       }
@@ -48,17 +44,17 @@ export default function SIPCalc() {
       </div>
       <div className="leftPanel">
         <Calc
-          mi={monthlyInvestment}
+          monthlyInvestment={monthlyInvestment}
           setValueMonthlyInvestment={setValueMonthlyInvestment}
-          ip={investmentPeriod}
+          investmentPeriod ={investmentPeriod}
           setValueInvestmentPeriod={setValueInvestmentPeriod}
-          ror={rateOfReturn}
+          rateOfReturn ={rateOfReturn}
           setValueRateOfReturn={setValueRateOfReturn}
-          roi={rateOfInflation}
+          rateOfInflation ={rateOfInflation}
           setValueRateOfInflation={setValueRateOfInflation} />
       </div>
       <div className="rightPanel">
-        {err ? <ErrorComp/> :<Graph sipGrowthResult = {sipGrowthResult} graph={graph} monthlyInvestment={monthlyInvestment} investmentPeriod={investmentPeriod} />}
+        {err ? <ErrorComp/> : <Graph result={result} monthlyInvestment={monthlyInvestment} investmentPeriod={investmentPeriod} />}
       </div>
     </div>
   )

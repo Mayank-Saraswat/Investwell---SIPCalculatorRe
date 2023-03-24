@@ -4,7 +4,7 @@ import ErrorComp from "../../../client/src/Components/errorComp";
 import { React, useState, useEffect } from "react";
 import axios from 'axios';
 
-export default function SIPCalc() {
+export default function SIPCalculator() {
   const [monthlyInvestment, setValueMonthlyInvestment] = useState(10000);
   const [investmentPeriod, setValueInvestmentPeriod] = useState(5);
   const [rateOfReturn, setValueRateOfReturn] = useState(10);
@@ -36,13 +36,15 @@ export default function SIPCalc() {
 
 
   return (
-    <div className='white-div'>
+    <div className='rightMain'>
+
       <br />
-      <div className="whiteDivHeader">
+      <div className="calculatorText">
         <h2>{"SIP Calculator"}</h2>
         <p>{"It tells you how much wealth you can create by making monthly investment"}</p>
       </div>
-      <div className="leftPanel">
+
+      <div className="leftContainer">
         <Calc
           monthlyInvestment={monthlyInvestment}
           setValueMonthlyInvestment={setValueMonthlyInvestment}
@@ -53,9 +55,11 @@ export default function SIPCalc() {
           rateOfInflation ={rateOfInflation}
           setValueRateOfInflation={setValueRateOfInflation} />
       </div>
-      <div className="rightPanel">
+
+      <div className="rightContainer">
         {err ? <ErrorComp/> : <Graph result={result} monthlyInvestment={monthlyInvestment} investmentPeriod={investmentPeriod} />}
       </div>
+
     </div>
   )
 }

@@ -5,8 +5,9 @@ import Grid from '@mui/material/Grid';
 import MuiInput from '@mui/material/Input';
 import { styled } from '@mui/material/styles';
 
+export default function SliderPanel(props) {
 
-const mark1 = [{
+    const mark1 = [{
     value: 50000,
     label: '50000',
 },
@@ -31,7 +32,6 @@ const mark1 = [{
     label: '1000000',
 },
 ];
-
 
 const mark2 = [{
     value: 0,
@@ -60,45 +60,6 @@ const mark2 = [{
 ];
 
 const Input2 = styled(MuiInput)`width: 110px;`;
-
-export default function SliderPanel(props) {
-     const handleSliderChange = (event, newValue) => {
-        props.setVal(newValue);
-    };
-
-    const handleInputChange = (event) => {
-        let val = event.target.value;
-        
-        if (Number(val) < props.min) {
-            props.setVal(props.min);
-          }
-      
-          if (Number(val) > props.max) {
-            props.setVal(props.max);
-          }
-
-        props.setVal(event.target.value === '' ? '' : Number(event.target.value));
-    };
-
-    const handleBlur = (event) => {
-        let val = event.target.value;
-    
-        if (val <= 0) {
-          alert("Please enter valid value greater than zero");
-          props.setVal(props.min);
-          return;
-        }
-    
-        if (Number(val) < props.min) {
-          props.setVal( props.min);
-          return;
-        }
-        if (Number(val) > props.max) {
-          props.setVal(props.max);
-          return;
-        }
-      };
-
     return (
         <>
             <br />
@@ -106,7 +67,7 @@ export default function SliderPanel(props) {
                 <Box sx={{ width: 570, margin: 1 }}>
 
                     <div className="sliderhead">
-                        <h3>{props.panelName}</h3>
+                        <h3>{props.sliderLabel}</h3>
                     </div>
 
                     <div className="Input">
@@ -115,8 +76,8 @@ export default function SliderPanel(props) {
                                 type="number"
                                 value={props.value}
                                 size="small"
-                                onBlur={handleBlur}
-                                onChange={handleInputChange}
+                                onBlur={(event, newValue)=>props.handleBlur(event, newValue, props)}
+                                onChange={(event, newValue)=>props.handleInputChange(event, newValue, props)}
                                 inputProps={{
                                     step: 1,
                                     min: props.min,
@@ -133,7 +94,7 @@ export default function SliderPanel(props) {
                             max={props.max}
                             step={1}
                             marks={props.field === 'monthlyInvestment' ? mark1 : mark2}
-                            onChange={handleSliderChange}
+                            onChange={(event, newValue)=>props.handleSliderChange(event, newValue, props.field)}
                             valueLabelDisplay="auto"
                             value={props.value}
                         />

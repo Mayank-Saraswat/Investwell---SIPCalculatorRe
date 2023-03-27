@@ -64,19 +64,22 @@ button{
   margin-left: 35px;
 }
 
-.container{
-  display: grid;
-  place-items: center;
-  margin-left: 10px;
-  padding-right: 50px;
-}
-
 .sliderPanelDiv .sliderhead{
   display: inline;
 }
 
 h3{
   display: inline;
+}
+
+h1{
+  color: red;
+  text-align: center;
+}
+
+.h2errComp{
+  color: green;
+  text-align: center;
 }
 
 .sliderPanelDiv .slider{
@@ -94,14 +97,14 @@ h3{
 }
 
 .rightSideBox .rightMain .rightContainer .graphHeader{
-  margin-left: 30px;
+  margin-left: 35px;
   margin-bottom: 50px;
   padding-top: 25px;
   color: #605e5e
 }
 
 .rightSideBox .rightMain .rightContainer .graphFooter{
-  margin-left: 5px;
+  margin-left: 35px;
 }
 
 .rightSideBox .rightMain .rightContainer .graphHeader .timeperiod{
@@ -124,4 +127,47 @@ h3{
 
 svg, .graphFooter{
   overflow: visible;
+}
+
+@media  (max-width: 1048px){
+  .rightSideBox .rightMain .container .rightContainer{
+    display: block;
+    width: 48%;
+  }
+  .rightSideBox .rightMain .container .rightContainer, .rightSideBox .rightMain .container .leftContainer{
+    font-size: small; 
+  }
+
+  .rightSideBox .rightMain .container .leftContainer .slidersArea{
+    overflow: hidden;
+  }
+
+  .rightSideBox .rightMain .container .rightContainer .calculatorText{
+    font-size: larger;
+    padding: 20px 5px;
+  }
+
+  .calculatorText h2, p {
+    font-size: small;
+  }
+}
+
+@media (max-width: 524px) {
+  .leftSideBox{
+    display: none;
+  }
+
+  .rightSideBox{
+    width: 100%;
+  }
+ 
+  .rightSideBox .rightMain .container .rightContainer{
+    width: 88%;
+  } 
+  .rightSideBox .rightMain .container .leftContainer{
+    width: 96%;
+  }
+  .calculatorText{
+    font-size: 20px;
+  }
 }
